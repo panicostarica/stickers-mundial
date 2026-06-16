@@ -290,16 +290,25 @@ canvas,
 1350
 );
 
+finalCanvas.toBlob(function(blob){
+
+const url = URL.createObjectURL(blob);
+
 const link = document.createElement("a");
 
-link.download = "pegatina.png";
+link.href = url;
+link.download = "sticker.png";
 
-link.href = finalCanvas.toDataURL(
-"image/png",
-1.0
-);
-
+document.body.appendChild(link);
 link.click();
+document.body.removeChild(link);
+
+/* iPhone / Android */
+setTimeout(() => {
+window.open(url, "_blank");
+}, 300);
+
+}, "image/png");
 
 });
 
